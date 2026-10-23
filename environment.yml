@@ -1,0 +1,8 @@
+name: liqml
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - xgboost
+  - pytorch
+prefix: /opt/anaconda3/envs/liqml
