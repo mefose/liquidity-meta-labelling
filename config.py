@@ -7,13 +7,16 @@ DATA_RAW = ROOT / "data" / "raw"
 RESULTS = ROOT / "results"
 FIGURES = ROOT / "figures"
 
-# ---------- Instruments (use your MT5 symbol names) ----------
-SYMBOLS = ["XAUUSD", "EURUSD", "GBPUSD", "US100"]
+# ---------- Data ----------
+DATA_SOURCE = "Vantage Markets MT5 (demo server), M15 bid bars"
+SYMBOLS = ["XAUUSD", "EURUSD", "GBPUSD", "US100"]   # must match data/raw/<SYMBOL>_M15.csv
+START_DATE = "2012-01-01"     # common start: NAS100 history begins 2012
+END_DATE = "2026-10-01"       # fixed end so results never change
 
 # ---------- Time zones ----------
 UK_TZ = "Europe/London"
 NY_TZ = "America/New_York"
-SERVER_TZ = None          # fill in after checking MT5 in Step 2
+SERVER_MINUS_NY_HOURS = 7     # server = UK + 2h on 23 Oct 2026 -> broker uses New York 5pm close
 
 # ---------- Strategy rules ----------
 SWING_BARS = 2            # rule 14: bars each side to confirm a swing
@@ -31,14 +34,18 @@ SESSION_OPENS = {
 }
 SESSION_WINDOW_MIN = 90   # trap must happen within 90 min of an open
 
+# ---------- Trading costs ----------
+SLIPPAGE_SPREADS = 0.5    # extra cost on top of the bar's spread (0.5 = half a spread)
+
 # ---------- Experiment switches ----------
 REQUIRE_PWH = True        # E3: set False to test without the weekly sweep
 REQUIRE_SESSION = True    # E4: set False to test without the session rule
-TARGET = "PDL"            # E5: "PDL" or "PWL"
+TARGET = "PDL"            # E5: "PDL" (previous day) or "PWL" (previous week)
 
 # ---------- Data split ----------
 TRAIN_FRAC = 0.6
 VAL_FRAC = 0.2            # test = the remaining 0.2
+PURGE_DAYS = 3            # gap between train/val/test so trades don't overlap
 
 # ---------- Models ----------
 SEED = 42
