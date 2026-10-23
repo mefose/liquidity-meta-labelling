@@ -10,7 +10,7 @@ FIGURES = ROOT / "figures"
 # ---------- Data ----------
 DATA_SOURCE = "Vantage Markets MT5 (demo server), M15 bid bars"
 SYMBOLS = ["XAUUSD", "EURUSD", "GBPUSD", "NAS100"]   # must match data/raw/<SYMBOL>_M15.csv
-START_DATE = "2012-01-01"     # common start: NAS100 history begins 2012
+START_DATE = "2019-01-01"     # common start: NAS100 history begins 2019
 END_DATE = "2026-10-01"       # fixed end so results never change
 
 # ---------- Time zones ----------
