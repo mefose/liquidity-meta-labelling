@@ -36,3 +36,22 @@ def load_m15(symbol: str) -> pd.DataFrame:
     df = df[(df.index >= config.START_DATE) & (df.index < config.END_DATE)]
     return df
 
+
+def add_uk_time(df: pd.DataFrame) -> pd.DataFrame:
+    """Add a 'time_uk' column. Index stays in broker server time (for daily/weekly candles)."""
+    ny_naive = df.index - pd.Timedelta(hours=config.SERVER_MINUS_NY_HOURS)
+    ny = ny_naive.tz_localize(config.NY_TZ, ambiguous="NaT", nonexistent="shift_forward")
+    df = df.copy()
+    df["time_uk"] = ny.tz_convert(config.UK_TZ)
+    return df[df["time_uk"].notna()]
+
+
+def resample_ohlc(df: pd.DataFrame, rule: str) -> pd.DataFrame:
+    """Build bigger candles from 15m bars. rule: '1h', '1D' or 'W-SUN'.
+    Weekly candles are labelled by the Sunday they start on, like MT5."""
+    if rule.startswith("W"):
+        grouped = df[list(OHLC_AGG)].resample(rule, label="left", closed="left")
+    else:
+        grouped = df[list(OHLC_AGG)].resample(rule)
+    out = grouped.agg(OHLC_AGG)
+    return out.dropna(subset=["open"])
