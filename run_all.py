@@ -4,13 +4,17 @@ Usage:  python run_all.py
 """
 import config
 from src.utils import set_seed, ensure_dirs
+from src.load import load_all
 
 
 def main() -> None:
     set_seed(config.SEED)
     ensure_dirs()
 
-    print("1. Load MT5 data            -> src/load.py      (Step 2)")
+    data = load_all()
+    for sym, frames in data.items():
+        for name, df in frames.items():
+            print(f"{sym:7} {name:4} {len(df):>8} bars   {df.index.min()}  ->  {df.index.max()}")
     print("2. Detect setups            -> src/detector.py  (Step 3)")
     print("3. Label trades             -> src/labels.py    (Step 4)")
     print("4. Build features           -> src/features.py  (Step 5)")
@@ -21,4 +25,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    min()
+    main()

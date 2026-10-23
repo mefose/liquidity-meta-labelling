@@ -55,3 +55,18 @@ def resample_ohlc(df: pd.DataFrame, rule: str) -> pd.DataFrame:
         grouped = df[list(OHLC_AGG)].resample(rule)
     out = grouped.agg(OHLC_AGG)
     return out.dropna(subset=["open"])
+
+
+
+def load_all() -> dict:
+    """Return {symbol: {'m15', 'h1', 'd1', 'w1'}} for every symbol in config.SYMBOLS."""
+    data = {}
+    for symbol in config.SYMBOLS:
+        m15 = add_uk_time(load_m15(symbol))
+        data[symbol] = {
+            "m15": m15,
+            "h1": resample_ohlc(m15, "1h"),
+            "d1": resample_ohlc(m15, "1D"),
+            "w1": resample_ohlc(m15, "W-SUN"),
+        }
+    return data
