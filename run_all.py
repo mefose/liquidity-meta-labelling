@@ -5,6 +5,8 @@ Usage:  python run_all.py
 import config
 from src.utils import set_seed, ensure_dirs
 from src.load import load_all
+from src.swings import add_swings
+from src.htf import add_levels, add_sweeps
 
 
 def main() -> None:
@@ -15,6 +17,15 @@ def main() -> None:
     for sym, frames in data.items():
         for name, df in frames.items():
             print(f"{sym:7} {name:4} {len(df):>8} bars   {df.index.min()}  ->  {df.index.max()}")
+
+    # swings + previous day/week levels + sweeps for every symbol
+    for sym, tf in data.items():
+        m = add_swings(tf["m15"])
+        m = add_sweeps(add_levels(m, tf["d1"], tf["w1"]))
+        tf["m15"] = m
+        days = m.groupby("day")[["sell_bias", "buy_bias"]].max().sum()
+        print(sym, "sell days:", int(days["sell_bias"]), " buy days:", int(days["buy_bias"]))
+
     print("2. Detect setups            -> src/detector.py  (Step 3)")
     print("3. Label trades             -> src/labels.py    (Step 4)")
     print("4. Build features           -> src/features.py  (Step 5)")
