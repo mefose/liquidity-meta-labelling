@@ -1,0 +1,16 @@
+\begin{table}[h]
+\centering
+\caption{Test-set classification results (mean $\pm$ SD over 5 seeds). AUC: higher is better, 0.5 = no skill.}
+\label{tab:table2_classification}
+\small
+\begin{tabular}{lrrrrrrr}
+\hline
+ & val AUC & AUC & precision & recall & MCC & bal\_acc & brier \\
+\hline
+LogReg & 0.540 & 0.621 & 0.121 & 0.923 & 0.075 & 0.543 & 0.242 \\
+RandomForest & 0.576 & 0.625 $\pm$ 0.007 & 0.111 $\pm$ 0.001 & 0.846 & -0.002 $\pm$ 0.011 & 0.499 $\pm$ 0.006 & 0.201 $\pm$ 0.001 \\
+GradBoost & 0.516 & 0.587 & 0.151 & 0.615 & 0.115 & 0.591 & 0.170 \\
+Coin flip & 0.500 & 0.500 & 0.111 & 0.500 & 0.000 & 0.500 & - \\
+\hline
+\end{tabular}
+\end{table}

@@ -1,0 +1,23 @@
+\begin{table}[h]
+\centering
+\caption{Strategy settings, data split and tuned hyperparameters.}
+\label{tab:table1_settings}
+\small
+\begin{tabular}{lr}
+\hline
+ & Value \\
+\hline
+Symbols & XAUUSD, EURUSD, GBPUSD, NAS100 \\
+Period & 2019-01-01 to 2026-10-01 \\
+Swing bars each side & 2 \\
+Session window (min) & 90 \\
+Stop buffer (x ATR) & 0.1 \\
+Minimum target (R) & 2.0 \\
+Timeout (days) & 3 \\
+Train / val / test trades & 350 / 117 / 117 \\
+LogReg (best) & C=1 \\
+RandomForest (best) & max\_depth=3, min\_samples\_leaf=5 \\
+GradBoost (best) & learning\_rate=0.03, max\_depth=3 \\
+\hline
+\end{tabular}
+\end{table}

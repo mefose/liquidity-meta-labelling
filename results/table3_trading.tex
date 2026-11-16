@@ -1,0 +1,20 @@
+\begin{table}[h]
+\centering
+\caption{Trading results on the test period after costs, in R (1R = the amount risked). pct\_positive = share of trades closing with a profit.}
+\label{tab:table3_trading}
+\small
+\begin{tabular}{lrrrrrr}
+\hline
+ & trades & pct\_positive & avg\_R & total\_R & max\_dd\_R & profit\_factor \\
+\hline
+E1 strategy, all rules (= B1) & 117 & 0.231 & -0.246 & -28.8 & 47.2 & 0.690 \\
+E2 ML filter (RandomForest) & 99 & 0.242 & -0.288 & -28.6 & 35.6 & 0.628 \\
+B2 random filter (avg of 1000) & 98 & 0.265 & -0.247 & -24.2 & 36.4 & 0.814 \\
+B3 majority class (no trades) & 0 & - & - & 0.0 & 0.0 & - \\
+B4 rule: target $\geq$ 3R & 75 & 0.200 & -0.241 & -18.1 & 36.8 & 0.714 \\
+E3 no weekly (PWH/PWL) rule & 307 & 0.244 & -0.134 & -41.3 & 55.9 & 0.828 \\
+E4 no session rule & 270 & 0.263 & -0.030 & -8.1 & 62.0 & 0.961 \\
+E5 target = previous week & 221 & 0.326 & -0.021 & -4.6 & 47.9 & 0.968 \\
+\hline
+\end{tabular}
+\end{table}

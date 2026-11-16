@@ -1,0 +1,12 @@
+,Value
+Symbols,"XAUUSD, EURUSD, GBPUSD, NAS100"
+Period,2019-01-01 to 2026-10-01
+Swing bars each side,2
+Session window (min),90
+Stop buffer (x ATR),0.1
+Minimum target (R),2.0
+Timeout (days),3
+Train / val / test trades,350 / 117 / 117
+LogReg (best),C=1
+RandomForest (best),"max_depth=3, min_samples_leaf=5"
+GradBoost (best),"learning_rate=0.03, max_depth=3"

@@ -10,7 +10,7 @@ FIGURES = ROOT / "figures"
 # ---------- Data ----------
 DATA_SOURCE = "Vantage Markets MT5 (demo server), M15 bid bars"
 SYMBOLS = ["XAUUSD", "EURUSD", "GBPUSD", "NAS100"]   # must match data/raw/<SYMBOL>_M15.csv
-START_DATE = "2019-01-01"     # common start: NAS100 history begins 2019
+START_DATE = "2019-01-01"     # first year with complete M15 data for all 4 symbols
 END_DATE = "2026-10-01"       # fixed end so results never change
 
 # ---------- Time zones ----------
@@ -51,3 +51,11 @@ PURGE_DAYS = 3            # gap between train/val/test so trades don't overlap
 SEED = 42
 N_SEEDS = 5
 OPTUNA_TRIALS = 50
+
+
+
+# ---------- Trading costs per symbol ----------
+# size of one MT5 "point" (the unit the <SPREAD> column is in)
+POINT = {"XAUUSD": 0.01, "EURUSD": 0.00001, "GBPUSD": 0.00001, "NAS100": 0.01}
+# some old bars have spread 0, so use at least this many points
+MIN_SPREAD_POINTS = {"XAUUSD": 15, "EURUSD": 8, "GBPUSD": 12, "NAS100": 100}
