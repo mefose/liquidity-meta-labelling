@@ -27,6 +27,7 @@ optree @ file:///Users/ec2-user/croot/optree_1786440555792/work
 optuna==5.0.0
 packaging==26.3
 pandas==3.1.0
+pandas-stubs==3.1.0.261029
 pathspec @ file:///home/conda/feedstock_root/build_artifacts/pathspec_1777271521463/work
 patsy==1.0.3
 pillow==13.0.0
